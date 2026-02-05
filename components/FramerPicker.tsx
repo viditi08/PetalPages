@@ -30,7 +30,7 @@ export default function Camera() {
     canvas.width = 400;
     canvas.height = 480;
 
-    const frame = new Image();
+    const frame = new window.Image();
     frame.src = "/assets/polaroid.png";
 
     frame.onload = () => {
