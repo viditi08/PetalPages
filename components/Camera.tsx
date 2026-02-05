@@ -61,12 +61,11 @@ export default function CameraPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FDFCFB] flex flex-col items-center py-12 px-6 overflow-hidden select-none">
-      
-      <div className="flex w-full max-w-7xl items-center justify-center gap-12">
+    <div className="min-h-screen bg-[#FDFCFB] flex flex-col items-center py-8 px-2 sm:py-12 sm:px-6 overflow-hidden select-none">
+      <div className="flex flex-col lg:flex-row w-full max-w-7xl items-center justify-center gap-6 lg:gap-12">
         
-      {/* LEFT: MEMORY ROLL SIDEBAR */}
-<div className="w-56 hidden xl:flex flex-col items-center justify-start pt-4 gap-6">
+        {/* LEFT: MEMORY ROLL SIDEBAR */}
+        <div className="w-full lg:w-56 hidden xl:flex flex-col items-center justify-start pt-4 gap-6">
   
   {/* The Heading - Now shifted to the very top */}
   <div className="w-full flex justify-center pb-2 border-b border-pink-100">
@@ -106,7 +105,7 @@ export default function CameraPage() {
 
         {/* CENTER: THE MASTER CAMERA RIG */}
         {/* We use a fixed-size container so internal elements NEVER move relative to the camera */}
-        <div className="relative flex-shrink-0" style={{ width: '700px', height: '500px' }}>
+        <div className="relative flex-shrink-0 w-full max-w-md lg:max-w-none" style={{ width: '100%', maxWidth: '700px', height: 'auto' }}>
           
           {/* 1. THE VIEWFEED - Locked inside the silver screen hole */}
           <div 
@@ -172,7 +171,7 @@ export default function CameraPage() {
         </div>
 
         {/* RIGHT: REVIEW PANEL */}
-        <div className="w-80">
+        <div className="w-full max-w-md lg:w-80 mt-6 lg:mt-0">
           <AnimatePresence mode="wait">
             {shots.length > 0 && shots[0].status === 'reviewed' ? (
               <motion.div initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} className="bg-white p-6 rounded-[40px] border shadow-2xl">
@@ -196,16 +195,15 @@ export default function CameraPage() {
       </div>
 
       {/* BIG CAPTURE BUTTON -> Now Compact */}
-<div className="mt-8 relative"> 
-  <button
-    onClick={capturePhoto}
-    disabled={isCapturing}
-    // Reduced px-20 to px-10, py-6 to py-3, and text-2xl to text-base
-    className="group relative px-10 py-3 rounded-full bg-pink-500 text-white font-bold text-base shadow-[0_6px_0_#be185d] hover:translate-y-[1px] hover:shadow-[0_4px_0_#be185d] active:translate-y-[6px] active:shadow-none transition-all disabled:bg-gray-200 disabled:shadow-none"
-  >
-    {isCapturing ? "🎞️ DEVELOPING..." : "📸 CAPTURE"}
-  </button>
-</div>
+      <div className="mt-6 sm:mt-8 w-full flex justify-center"> 
+        <button
+          onClick={capturePhoto}
+          disabled={isCapturing}
+          className="group relative w-full max-w-xs px-6 py-3 rounded-full bg-pink-500 text-white font-bold text-base shadow-[0_6px_0_#be185d] hover:translate-y-[1px] hover:shadow-[0_4px_0_#be185d] active:translate-y-[6px] active:shadow-none transition-all disabled:bg-gray-200 disabled:shadow-none"
+        >
+          {isCapturing ? "🎞️ DEVELOPING..." : "📸 CAPTURE"}
+        </button>
+      </div>
       <canvas ref={canvasRef} className="hidden" />
     </div>
   );
